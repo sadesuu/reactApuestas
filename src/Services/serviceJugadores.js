@@ -9,4 +9,10 @@ export default class serviceJugadores {
         let res = await axios.get(url + req)
         return res.data
     }
+    getPlayerById = async (idPlayer) => {
+        let url = Global.apiGeneral
+        let req = "api/Jugadores/"+idPlayer
+        let res = await axios.get(url + req)
+        return res.data
+    }
 }

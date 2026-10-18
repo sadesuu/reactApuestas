@@ -46,17 +46,8 @@ export default class MenuComponent extends Component {
                     {
                       this.state.equipos.map((e) => {
                         return (
-                          <li
-                            key={e.idEquipo}
-                            onMouseEnter={() => this.setState({ equipoHovered: e.idEquipo })}
-                            onMouseLeave={() => this.setState({ equipoHovered: null })}
-                            style={{
-                              backgroundColor: this.state.equipoHovered === e.idEquipo ? '#7d7d7e' : 'transparent',
-                              transition: 'background-color 160ms ease-out',
-                              cursor: 'pointer'
-                            }}
-                          >
-                            <NavLink style={{textDecoration: "none", color:"black"}} to={`/team/${e.idEquipo}`}>
+                          <li key={e.idEquipo}>
+                            <NavLink className="dropdown-item" to={`/team/${e.idEquipo}`}>
                               {e.nombre}
                             </NavLink>
                           </li>

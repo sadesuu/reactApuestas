@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import serviceJugadores from '../Services/serviceJugadores'
+import { NavLink } from 'react-router-dom'
 
 export default class PlayersComponent extends Component {
     service = new serviceJugadores()
@@ -45,114 +46,59 @@ export default class PlayersComponent extends Component {
         const { jugadores, loading, error } = this.state
 
         return (
-            <main style={styles.page}>
-                <section style={styles.section} aria-labelledby="players-title">
-                    <p style={styles.eyebrow}>Plantilla del equipo</p>
-                    <h1 id="players-title" style={styles.title}>Jugadores</h1>
+            <main className="min-vh-100 bg-light py-5">
+                <section className="container bg-body-secondary p-4 p-md-5" aria-labelledby="players-title">
+                    <p className="text-uppercase text-warning fw-bold small mb-2">
+                        Plantilla del equipo
+                    </p>
+                    <h1 id="players-title" className="display-1 fw-bold text-uppercase mb-5">
+                        Jugadores
+                    </h1>
 
-                    {loading && <p style={styles.status}>Cargando jugadores...</p>}
-                    {error && <p style={styles.statusError}>{error}</p>}
+                    {loading && <p className="fs-5 text-secondary">Cargando jugadores...</p>}
+                    {error && <p className="fs-5 text-danger">{error}</p>}
                     {!loading && !error && jugadores.length === 0 && (
-                        <p style={styles.status}>Este equipo no tiene jugadores registrados.</p>
+                        <p className="fs-5 text-secondary">
+                            Este equipo no tiene jugadores registrados.
+                        </p>
                     )}
 
-                    <div style={styles.grid}>
+                    <div className="row g-4">
                         {jugadores.map((jugador) => (
-                            <article key={jugador.idJugador} style={styles.player}>
-                                <img
-                                    src={jugador.imagen}
-                                    alt={jugador.nombre}
-                                    style={styles.image}
-                                />
-                                <div style={styles.info}>
-                                    <h2 style={styles.name}>{jugador.nombre}</h2>
-                                    <p style={styles.position}>{jugador.posicion}</p>
-                                    <p style={styles.country}>{jugador.pais}</p>
-                                </div>
-                            </article>
+                            <div className="col-12 col-md-6 col-xl-4" key={jugador.idJugador}>
+                                <NavLink
+                                    to={`/team/${this.props.id}/players/${jugador.idJugador}`}
+                                    className="card h-100 shadow-sm text-decoration-none text-dark"
+                                    aria-label={`Ver información de ${jugador.nombre}`}
+                                >
+                                    <div className="row g-0 h-100">
+                                        <div className="col-4 bg-dark d-flex align-items-center justify-content-center">
+                                            <img
+                                                src={jugador.imagen}
+                                                alt={jugador.nombre}
+                                                className="img-fluid object-fit-cover h-100"
+                                            />
+                                        </div>
+                                        <div className="col-8">
+                                            <div className="card-body">
+                                                <h2 className="card-title h5 text-uppercase">
+                                                    {jugador.nombre}
+                                                </h2>
+                                                <p className="card-text text-warning fw-bold text-uppercase small">
+                                                    {jugador.posicion}
+                                                </p>
+                                                <p className="card-text text-secondary small mb-0">
+                                                    {jugador.pais}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </NavLink>
+                            </div>
                         ))}
                     </div>
                 </section>
             </main>
         )
-    }
-}
-
-const styles = {
-    page: {
-        backgroundColor: '#f4f1ea',
-        minHeight: 'calc(100vh - 56px)',
-        padding: 'clamp(2rem, 6vw, 6rem) clamp(1rem, 6vw, 7rem)',
-        color: '#171717'
-    },
-    section: {
-        backgroundColor: '#e7e2d9',
-        margin: '0 auto',
-        maxWidth: '1180px',
-        padding: 'clamp(2rem, 5vw, 4rem)'
-    },
-    eyebrow: {
-        color: '#9b6b27',
-        fontSize: '0.75rem',
-        fontWeight: 700,
-        letterSpacing: '0.18em',
-        margin: '0 0 1rem',
-        textTransform: 'uppercase'
-    },
-    title: {
-        fontSize: 'clamp(3rem, 7vw, 6rem)',
-        letterSpacing: '-0.06em',
-        lineHeight: 0.9,
-        margin: '0 0 3rem',
-        textTransform: 'uppercase'
-    },
-    grid: {
-        display: 'grid',
-        gap: '1rem',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))'
-    },
-    player: {
-        backgroundColor: '#ffffff',
-        display: 'flex',
-        minHeight: '140px',
-        overflow: 'hidden'
-    },
-    image: {
-        backgroundColor: '#1d2935',
-        height: '140px',
-        objectFit: 'cover',
-        width: '110px'
-    },
-    info: {
-        padding: '1.1rem'
-    },
-    name: {
-        fontSize: '1.2rem',
-        lineHeight: 1,
-        margin: '0 0 0.6rem',
-        textTransform: 'uppercase'
-    },
-    position: {
-        color: '#9b6b27',
-        fontSize: '0.72rem',
-        fontWeight: 700,
-        letterSpacing: '0.1em',
-        margin: '0 0 0.45rem',
-        textTransform: 'uppercase'
-    },
-    country: {
-        color: '#73736e',
-        fontSize: '0.8rem',
-        margin: 0
-    },
-    status: {
-        color: '#4f514e',
-        fontSize: '1.1rem',
-        margin: 0
-    },
-    statusError: {
-        color: '#9a342d',
-        fontSize: '1.1rem',
-        margin: 0
     }
 }

@@ -5,6 +5,7 @@ import MenuComponent from './MenuComponent'
 import TeamsComponent from './TeamsComponent'
 import PlayersComponent from './PlayersComponent'
 import ApuestasComponent from './ApuestasComponent'
+import PlayerModal from './PlayerModal'
 
 export default class Router extends Component {
   render() {
@@ -16,6 +17,10 @@ export default class Router extends Component {
       const { id } = useParams()
       return <PlayersComponent id={id} />
     }
+    function PlayerModalElement(){
+      const { playerId } = useParams()
+      return <PlayerModal id={playerId} />
+    }
     return (
       <BrowserRouter>
         <MenuComponent />
@@ -24,6 +29,7 @@ export default class Router extends Component {
           <Route path="/apuestas" element={<ApuestasComponent/>} />
           <Route path="/team/:id" element={<TeamsComponentElement />} />
           <Route path="/team/:id/players" element={<PlayersComponentElement />} />
+          <Route path="/team/:teamId/players/:playerId" element={<PlayerModalElement />} />
         </Routes>
       </BrowserRouter>
     )
