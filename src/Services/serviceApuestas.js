@@ -13,9 +13,17 @@ export default class serviceApuestas {
     createApuesta = async (apuesta) => {
         let url = Global.apiGeneral;
         let req = "api/Apuestas"
-        let res = await axios.post(url + req , apuesta)
-        
+        let res = await axios.post(url + req, apuesta)
+
         return res.data
 
+    }
+
+    deleteApuesta = async (id) => {
+        let url = Global.apiGeneral;
+        let req = "api/Apuestas/" + id
+        let res = await axios.delete(url + req)
+
+        return res.data
     }
 }

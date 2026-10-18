@@ -6,6 +6,7 @@ import TeamsComponent from './TeamsComponent'
 import PlayersComponent from './PlayersComponent'
 import ApuestasComponent from './ApuestasComponent'
 import PlayerModal from './PlayerModal'
+import CreateBet from './CreateBet'
 
 export default class Router extends Component {
   render() {
@@ -27,6 +28,7 @@ export default class Router extends Component {
         <Routes>
           <Route path="/" element={<HomeComponent />} />
           <Route path="/apuestas" element={<ApuestasComponent/>} />
+          <Route path="/apuestas/crear" element={<CreateBet />} />
           <Route path="/team/:id" element={<TeamsComponentElement />} />
           <Route path="/team/:id/players" element={<PlayersComponentElement />} />
           <Route path="/team/:teamId/players/:playerId" element={<PlayerModalElement />} />
